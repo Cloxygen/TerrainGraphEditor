@@ -1,0 +1,32 @@
+# Ignore IDE settings and local junk
+.vs/
+.vscode/
+.idea/
+*.csproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svclog
+*.pdb
+*.mdb
+*.opendb
+*.db
+*.VC.db
+
+# Ignore OS generated files
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Unity-specific (that might sneak into subfolders)
+.plastic/
+.utmp/
+
+# DO NOT ignore .meta files - they are required for Unity packages!
+!*.meta
