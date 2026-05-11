@@ -1,7 +1,5 @@
 # Terrain Generation Project
 
-![Banner Placeholder](Documentation/banner.png)
-
 [![Unity 2022.3+](https://img.shields.io/badge/Unity-2022.3%2B-blue.svg?style=flat&logo=unity)](https://unity.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -75,14 +73,6 @@ Development followed a structured, iterative loop with an AI coding agent. The p
 Once code was written, each piece was read through and tested manually. Results varied — some components worked immediately, while others required extensive back-and-forth: anywhere from a single clarifying instruction to dozens of precise, explicit prompts to get the behavior exactly right. This process demanded a solid understanding of what the code *should* do in order to diagnose why it *didn't*, and to communicate corrections effectively.
 
 The final result reflects decisions that were deliberated at every stage, with AI acting as an implementation tool under close human direction.
-
----
-
-## Future Roadmap
-- **Compute Shader Support**: Moving erosion and noise calculations to the GPU for faster bakes on high-resolution maps.
-- **Biome Masking**: Using graph output to generate texture splatmaps and vegetation density maps automatically.
-- **Curve & Remap Nodes**: Fine-grained heightmap control via additional node types.
-- **TerrainChunk Optimization**: Object pooling for mesh rebuilds to reduce GC pressure during regeneration.
 
 ---
 
