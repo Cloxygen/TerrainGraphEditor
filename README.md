@@ -1,88 +1,111 @@
-# Terrain Generation Project
-
-[![Unity 2022.3+](https://img.shields.io/badge/Unity-2022.3%2B-blue.svg?style=flat&logo=unity)](https://unity.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
+# TerrainGraphEditor [![Unity 6.3](https://img.shields.io/badge/Unity-6.3-blue.svg?style=flat&logo=unity)](https://unity.com/) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Overview
-This project is a procedural terrain generation tool for Unity, featuring a custom node-based graph editor. It allows for flexible creation of terrain maps using various mathematical operations and noise functions, which are then evaluated and applied to a chunked terrain system in the scene.
 
-### 🛠️ Requirements
-*   **Unity 2022.3 LTS** or higher.
-*   **Universal Render Pipeline (URP)** recommended (for included shaders).
-*   **Unity Mathematics** package.
+TerrainGraphEditor is a procedural terrain generation tool for Unity 6.3, featuring a custom node-based graph editor.
 
+It allows for flexible creation of terrain maps using mathematical operations, noise functions, and erosion systems. Graphs are evaluated and baked into reusable `TerrainDataMap` assets, which are then applied to a chunked terrain system inside the Unity Editor.
+
+This project demonstrates custom Unity editor tooling, graph-based data flow, procedural generation, terrain data baking, chunked mesh generation, and editor-driven terrain workflows.
+
+---
+
+## Requirements
+
+- **Unity 6.3**
+- **Universal Render Pipeline (URP)** recommended for the included shaders
+- **Unity Mathematics** package
+
+---
 
 ## Key Features
-- **Node-Based Editor**: A custom visual editor for designing terrain pipelines.
-- **Procedural Generation**: Support for various noise types (e.g., Perlin) and math operations.
-- **Chunked Terrain System**: Efficiently renders large terrains by breaking them into manageable chunks.
-- **Geological Simulation**: Thermal and Hydraulic erosion models add a layer of natural realism to standard procedural noise.
-- **Data Baking**: Evaluation of graphs into reusable `TerrainDataMap` assets.
+
+- **Node-Based Editor**: A custom visual editor for designing procedural terrain pipelines.
+- **Procedural Generation**: Support for noise generation, including Perlin noise, along with mathematical operations for shaping terrain data.
+- **Chunked Terrain System**: Renders terrain by breaking it into manageable chunks.
+- **Geological Simulation**: Thermal and hydraulic erosion models add natural terrain shaping on top of procedural noise.
+- **Data Baking**: Graphs are evaluated into reusable `TerrainDataMap` assets.
+- **Editor-Driven Workflow**: Terrain can be designed, baked, assigned, configured, and generated inside the Unity Editor.
+- **ScriptableObject Persistence**: Graphs and baked terrain data are stored as reusable Unity assets.
+
+---
+
+## Why This Project Matters
+
+TerrainGraphEditor is not just a terrain demo. It is a custom Unity tool with a full editor-side workflow.
+
+The project demonstrates:
+
+- Custom Unity editor window development
+- Node-based visual tooling
+- Graph asset persistence using `ScriptableObject`
+- Procedural terrain generation
+- Graph traversal and evaluation
+- Terrain data baking
+- Chunked mesh generation
+- Custom inspectors
+- Editor-time terrain creation
+- Thermal and hydraulic erosion simulation
+- Shader and material integration for generated terrain
+
+The tool separates terrain design from terrain rendering. The graph editor produces reusable terrain data, while the terrain system consumes that data and builds the mesh representation.
+
+---
 
 ## Architecture Overview
+
 The project is organized around a clean separation between the graph editor tools and the inspector-driven terrain system, both operating entirely within the Unity Editor.
 
 | Class | Location | Responsibility |
 |---|---|---|
-| `TerrainGraphWindow` | `Editor/TerrainGraphWindow.cs` | Main editor window — UI, node rendering, and user input |
-| `TerrainGraphAsset` | `Editor/TerrainGraphAsset.cs` | `ScriptableObject` that persists nodes and connections |
-| `GraphNode` | `Editor/GraphNode.cs` | Base class for all nodes; subclasses implement specific logic (e.g., `PerlinNoiseNode`) |
+| `TerrainGraphWindow` | `Editor/TerrainGraphWindow.cs` | Main editor window for UI, node rendering, user input, graph navigation, and toolbar actions |
+| `TerrainGraphAsset` | `Editor/TerrainGraphAsset.cs` | `ScriptableObject` that persists graph nodes and connections |
+| `GraphNode` | `Editor/GraphNode.cs` | Base class for all nodes; subclasses implement specific node behavior, such as `PerlinNoiseNode` |
 | `GraphEvaluator` | `Editor/GraphEvaluator.cs` | Traverses the graph and calculates the final terrain data |
-| `TerrainManager` | `Scripts/TerrainManager.cs` | `MonoBehaviour` with a custom Inspector that consumes a `TerrainDataMap` and exposes an **Update Mesh** button |
+| `TerrainDataMap` | Editor/data system | Reusable baked terrain data generated from graph evaluation |
+| `TerrainManager` | `Scripts/TerrainManager.cs` | `MonoBehaviour` with a custom inspector that consumes a `TerrainDataMap` and exposes an **Update Mesh** button |
 | `TerrainChunk` | `Scripts/TerrainChunk.cs` | Handles mesh generation and rendering for a single terrain segment |
-
-## Installation
-
-1.  **Download the Tool**: Clone this repository or download the ZIP.
-2.  **Import to Unity**: Drop the `TerrainGraphEditor` folder into your project's `Assets` directory.
-3.  **Check Dependencies**: Ensure the `Unity Mathematics` package is installed via the Package Manager.
-
-## Getting Started
-
-1. **Open the Terrain Graph Editor** — go to `Tools` > `Terrain Graph` in the Unity menu bar.
-2. **Create or load a graph** — click **Create New Graph** in the toolbar, or select an existing `TerrainGraphAsset` in the graph selection field.
-3. **Add nodes** — right-click in the graph area to see available nodes (Noise, Math, Output, etc.).
-4. **Connect nodes** — drag from an output port to an input port to define the data flow. Ensure your graph ends with an **Output** node representing the final heightmap.
-5. **Bake the data** — click **Bake Data Map** in the toolbar to generate the `TerrainDataMap` asset.
-6. **Set up the scene** — add a **TerrainManager** component to a GameObject and assign the baked `TerrainDataMap` to its **DataSource** field.
-7. **Adjust settings** — configure **Chunk Size**, **Height Scale**, and **Grid Settings** on the `TerrainManager` as needed.
-8. **Generate** — click the **Update Mesh** button in the `TerrainManager` inspector to build the terrain in the editor.
-
-## Design & Implementation Notes
-
-### User-Centric Design Goals
-- **Visual Workflow**: A node-based graph approach was chosen to make procedural generation intuitive and non-linear.
-- **Responsive UX**: To prevent UI lockups during intensive bakes, the evaluation system uses an iterative step-by-step process with a built-in progress bar.
-- **Modular Data**: Using `ScriptableObjects` ensures that terrain "recipes" are portable and completely decoupled from the rendering scene.
-
-### Key Technical Systems
-- **Decoupled Engine**: The generation logic outputs a standalone `TerrainDataMap`, allowing the procedural data to be used by any custom mesh or vertex system.
-- **Custom GUI Transformations**: Matrix-based coordinate space handling manages pixel-perfect node interactions across different zoom and pan levels.
-- **Geological Simulation**: Integrated Thermal and Hydraulic erosion models produce natural-looking terrain from standard procedural noise.
-
-### 🖼️ Gallery
-| Node Graph Editor | Resulting Terrain |
-|---|---|
-| ![Graph Screenshot](Documentation/graph_editor.png) | ![Terrain Screenshot](Documentation/terrain_result.png) |
-
-
-### Development Process & AI Oversight
-Development followed a structured, iterative loop with an AI coding agent. The project was broken into discrete components, and for each one, the agent was prompted to produce a detailed implementation plan before writing any code. These plans were reviewed and approved before proceeding, ensuring the overall architecture remained intentional rather than emergent.
-
-Once code was written, each piece was read through and tested manually. Results varied — some components worked immediately, while others required extensive back-and-forth: anywhere from a single clarifying instruction to dozens of precise, explicit prompts to get the behavior exactly right. This process demanded a solid understanding of what the code *should* do in order to diagnose why it *didn't*, and to communicate corrections effectively.
-
-The final result reflects decisions that were deliberated at every stage, with AI acting as an implementation tool under close human direction.
 
 ---
 
-## Project Structure
-```
-Assets/TerrainGraphEditor/
-├── Editor/        # Editor scripts, graph logic, and node definitions
-├── Scripts/       # TerrainManager and TerrainChunk — editor-time mesh generation
-├── Shaders/       # Custom terrain shaders
-├── Materials/     # Materials used by the terrain system
-├── NODE_REFERENCE.md   # Detailed guide for all available nodes
-└── LICENSE.md          # MIT License
-```
+## Design Approach
+
+TerrainGraphEditor is built around a purpose-fit workflow:
+
+1. Create or load a graph.
+2. Add procedural terrain nodes.
+3. Connect nodes into a generation pipeline.
+4. Evaluate and bake the graph into a `TerrainDataMap`.
+5. Assign the baked data to a `TerrainManager`.
+6. Generate chunked terrain meshes in the editor.
+
+The graph editor is responsible for terrain design and data generation. The terrain system is responsible for consuming baked data and generating meshes.
+
+This keeps the project easier to reason about:
+
+- Graph assets define terrain recipes.
+- Graph evaluation produces terrain data.
+- Baked data can be reused.
+- Terrain managers consume baked data.
+- Terrain chunks handle mesh construction.
+
+---
+
+## Installation
+
+1. **Download the Tool**: Clone this repository or download the ZIP.
+2. **Import to Unity**: Drop the `TerrainGraphEditor` folder into your project's `Assets` directory.
+3. **Check Dependencies**: Ensure the `Unity Mathematics` package is installed through the Unity Package Manager.
+4. **Use URP if Needed**: Universal Render Pipeline is recommended for the included shaders and materials.
+
+Example folder structure:
+
+```text
+Assets/
+└── TerrainGraphEditor/
+    ├── Editor/
+    ├── Scripts/
+    ├── Shaders/
+    ├── Materials/
+    ├── NODE_REFERENCE.md
+    └── LICENSE.md
