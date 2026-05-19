@@ -64,7 +64,7 @@ The project is organized around a clean separation between the graph editor tool
 ### 🖼️ Gallery
 | Node Graph Editor | Resulting Terrain |
 |---|---|
-| ![Graph Screenshot](Documentation/graph_editor.png) | ![Terrain Screenshot](Documentation/terrain_result.png) |
+| ![Graph Screenshot](https://i.ibb.co/9mh3jGR8/Screenshot-2026-05-19-115352.png) | ![Terrain Screenshot](https://i.ibb.co/d4LP25Jq/Screenshot-2026-05-03-131613.png) |
 
 
 ### Development Process & AI Oversight
