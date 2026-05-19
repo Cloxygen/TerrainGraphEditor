@@ -68,7 +68,7 @@ The project is organized around a clean separation between the graph editor tool
 
 
 ### Development Process & AI Oversight
-Development followed a structured, iterative loop with an AI coding agent. The project was broken into discrete components, and for each one, the agent was prompted to produce a detailed implementation plan before writing any code. These plans were reviewed and approved before proceeding, ensuring the overall architecture remained intentional rather than emergent.
+Development followed a structured, iterative loop with an AI coding agent. The project was broken into discrete components, and for each one, the agent was prompted to produce a detailed implementation plan before writing any code. These plans were reviewed and approved before proceeding, ensuring the overall architecture remained intentional.
 
 Once code was written, each piece was read through and tested manually. Results varied — some components worked immediately, while others required extensive back-and-forth: anywhere from a single clarifying instruction to dozens of precise, explicit prompts to get the behavior exactly right. This process demanded a solid understanding of what the code *should* do in order to diagnose why it *didn't*, and to communicate corrections effectively.
 
