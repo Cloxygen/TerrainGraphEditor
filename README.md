@@ -6,7 +6,7 @@ TerrainGraphEditor is a procedural terrain generation tool for Unity 6.3, featur
 
 It allows for flexible creation of terrain maps using mathematical operations, noise functions, and erosion systems. Graphs are evaluated and baked into reusable `TerrainDataMap` assets, which are then applied to a chunked terrain system inside the Unity Editor.
 
-This project demonstrates custom Unity editor tooling, graph-based data flow, procedural generation, terrain data baking, chunked mesh generation, and editor-driven terrain workflows.
+This project demonstrates custom Unity editor tooling, graph-based data flow, procedural generation, terrain data baking, chunked mesh generation, geological simulation, and editor-driven terrain workflows.
 
 ---
 
