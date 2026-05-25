@@ -7,6 +7,11 @@
 ## Overview
 This project is a procedural terrain generation tool for Unity 6.3, featuring a custom node-based graph editor. It allows for flexible creation of terrain maps using various mathematical operations and noise functions, which are then evaluated and applied to a chunked terrain system in the scene.
 
+### 🖼️ Gallery
+| Node Graph Editor | Resulting Terrain |
+|---|---|
+| ![Graph Screenshot](https://i.ibb.co/9mh3jGR8/Screenshot-2026-05-19-115352.png) | ![Terrain Screenshot](https://i.ibb.co/d4LP25Jq/Screenshot-2026-05-03-131613.png) |
+
 ### 🛠️ Requirements
 *   **Unity 6.3**
 *   **Universal Render Pipeline (URP)** recommended for included shaders.
@@ -60,11 +65,6 @@ The project is organized around a clean separation between the graph editor tool
 - **Decoupled Engine**: The generation logic outputs a standalone `TerrainDataMap`, allowing the procedural data to be used by any custom mesh or vertex system.
 - **Custom GUI Transformations**: Matrix-based coordinate space handling manages pixel-perfect node interactions across different zoom and pan levels.
 - **Geological Simulation**: Integrated Thermal and Hydraulic erosion models produce natural-looking terrain from standard procedural noise.
-
-### 🖼️ Gallery
-| Node Graph Editor | Resulting Terrain |
-|---|---|
-| ![Graph Screenshot](https://i.ibb.co/9mh3jGR8/Screenshot-2026-05-19-115352.png) | ![Terrain Screenshot](https://i.ibb.co/d4LP25Jq/Screenshot-2026-05-03-131613.png) |
 
 ### AI-Assisted Development
 
