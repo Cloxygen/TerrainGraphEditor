@@ -66,13 +66,11 @@ The project is organized around a clean separation between the graph editor tool
 |---|---|
 | ![Graph Screenshot](https://i.ibb.co/9mh3jGR8/Screenshot-2026-05-19-115352.png) | ![Terrain Screenshot](https://i.ibb.co/d4LP25Jq/Screenshot-2026-05-03-131613.png) |
 
+### AI-Assisted Development
 
-### Development Process & AI Oversight
-Development followed a structured, iterative loop with an AI coding agent. The project was broken into discrete components, and for each one, the agent was prompted to produce a detailed implementation plan before writing any code. These plans were reviewed and approved before proceeding, ensuring the overall architecture remained intentional.
+This project used AI-assisted development as an implementation and iteration tool, but the architecture, feature direction, debugging, testing, and integration decisions were handled manually. The workflow involved breaking features into small tasks, reviewing and modifying generated code, resolving Unity-specific issues, and validating behavior inside the editor.
 
-Once code was written, each piece was read through and tested manually. Results varied — some components worked immediately, while others required extensive back-and-forth: anywhere from a single clarifying instruction to dozens of precise, explicit prompts to get the behavior exactly right. This process demanded a solid understanding of what the code *should* do in order to diagnose why it *didn't*, and to communicate corrections effectively.
-
-The final result reflects decisions that were deliberated at every stage, with AI acting as an implementation tool under close human direction.
+It was not produced from a single prompt or left to run autonomously; AI was used to support development, not replace engineering ownership.
 
 ---
 
