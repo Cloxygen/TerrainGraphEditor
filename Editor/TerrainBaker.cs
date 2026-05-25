@@ -6,8 +6,8 @@ using TerrainGraph.Authoring;
 
 namespace TerrainGraph.Baking
 {
-    /// A standalone engine that handles the multi-stage evaluation of a TerrainGraph.
-    /// It processes nodes one-by-one in the background to prevent editor lockup.
+    /// Builds terrain data from a TerrainGraph.
+    /// Does the work in small steps so Unity stays responsive.
     public class TerrainBaker
     {
         // ==========================================
